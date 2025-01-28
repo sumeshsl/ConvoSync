@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: convosync-api-kube
+spec:
+  replicas: 2  # Number of pods
+  selector:
+    matchLabels:
+      app: convosync-api
+  template:
+    metadata:
+      labels:
+        app: convosync-api
+    spec:
+      containers:
+      - name: convosync-api-container
+        image: sumeshsldev/convosync-api:latest
+        ports:
+        - containerPort: 8002
