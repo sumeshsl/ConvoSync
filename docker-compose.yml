@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    networks:
+      - adaptai-network
+    #environment:
+      #MONGO_INITDB_ROOT_USERNAME: root
+      #MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+
+  main-app:
+    build: .
+    container_name: main-app
+    networks:
+      - adaptai-network
+    depends_on:
+      - mongodb
+      - api-postprocessing
+    environment:
+      MONGO_URI: "mongodb://adaptaiuser:securePassword@mongodb:27017/adaptAiDatabase?authSource=adaptAiDatabase"
+    ports:
+      - "8008:8008"
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8008"]
+
+
+
+  api-gateway:
+    build:
+      context: ./app/api-gateway
+    container_name: api-gateway
+    ports:
+      - "8010:8010"
+    depends_on:
+      - main-app
+    command: ["uvicorn", "gateway:app", "--host", "0.0.0.0", "--port", "8010"]
+
+  api-postprocessing:
+    build:
+      context: ./app/api-postprocessing
+    container_name: api-postprocessing
+    networks:
+      - adaptai-network
+    ports:
+      - "8004:8004"
+    environment:
+      - PYTHONPATH=/app
+    command: ["uvicorn", "postprocessing:app", "--host", "0.0.0.0", "--port", "8004"]
+
+  api-verification:
+    build:
+      context: ./app/api-verification
+    container_name: api-verification
+    networks:
+      - adaptai-network
+    ports:
+      - "8002:8002"
+    environment:
+      - PYTHONPATH=/app
+    command: ["uvicorn", "verification:app", "--host", "0.0.0.0", "--port", "8002"]
+
+volumes:
+  mongo_data:
+
+networks:
+  adaptai-network:
+    driver: bridge

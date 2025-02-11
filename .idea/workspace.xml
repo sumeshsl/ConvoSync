@@ -4,19 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eae406a1-c8c2-4021-a5d5-5d209ffa53da" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ConvoSync.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/queryRoutes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/schemas.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deployment.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    <list default="true" id="eae406a1-c8c2-4021-a5d5-5d209ffa53da" name="Changes" comment="Initial Commit">
+      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-gateway/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-gateway/gateway.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-gateway/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/postprocessing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/postprocessing_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-verification/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-verification/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-verification/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-verification/verification.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api-verification/verification_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/database/mongodb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/routes/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ConvoSync.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/adaptAI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/queryRoutes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/query_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/services.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,20 +40,44 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Dockerfile" />
         <option value="Python Script" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sumeshsl&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sumeshsl/ConvoSync.git&quot;,
+    &quot;accountId&quot;: &quot;f53c2539-52f8-4360-a734-e3c98becbb4c&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2sGVJ11l0Q8c3Rmg9sPxYwrmjH3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,9 +86,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.gateway.executor": "Run",
+    "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Sumesh/Documents/Sumesh/F1Dream/Villanova/Learnings/2025_Spring/9025/ConvoSync/app/web-socket",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -60,6 +101,19 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\web-socket" />
+      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-verification" />
+      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
+      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-gateway" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
+      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\routes" />
+      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-gateway" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -76,11 +130,48 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1738081822513</updated>
-      <workItem from="1738081823611" duration="4430000" />
+      <workItem from="1738081823611" duration="15356000" />
+      <workItem from="1738316676386" duration="34000" />
+      <workItem from="1738563757870" duration="23817000" />
+      <workItem from="1738911761814" duration="2452000" />
+      <workItem from="1738916502632" duration="3585000" />
+      <workItem from="1738993652525" duration="5830000" />
+      <workItem from="1739069065314" duration="6518000" />
+      <workItem from="1739075682554" duration="1992000" />
+      <workItem from="1739227161706" duration="5491000" />
+      <workItem from="1739290068658" duration="5405000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1738087114174</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1738087114174</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/routes/query_routes.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ConvoSync$main.coverage" NAME="main Coverage Results" MODIFIED="1738093341278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ConvoSync$gateway.coverage" NAME="gateway Coverage Results" MODIFIED="1738640105926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/api-gateway" />
   </component>
 </project>

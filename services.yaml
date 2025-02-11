@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: convosync-api-service
+spec:
+  selector:
+    app: convosync-api
+  ports:
+    - protocol: TCP
+      port: 80  # Exposed port
+      targetPort: 8002  # Container port
+  type: LoadBalancer  # Use ClusterIP, NodePort, or LoadBalancer

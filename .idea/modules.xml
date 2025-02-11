@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ConvoSync.iml" filepath="$PROJECT_DIR$/.idea/ConvoSync.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/adaptAI.iml" filepath="$PROJECT_DIR$/.idea/adaptAI.iml" />
     </modules>
   </component>
 </project>
