@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/.venv11" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.11 (ConvoSync)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.11 virtualenv at D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\.venv311" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

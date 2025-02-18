@@ -13,25 +13,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-#Input for preprocessing model
-class Query(BaseModel):
-    id: Optional[int] = None
-    usercommand: str
-    source: str
 
-#Represents a response for a query from a specific AI model
-class AIResponse(BaseModel):
-    response: str
-    model: str
-
-#Input for Verification Service
-class QueryResult(Query):
-    results: list[AIResponse]
-
-#Output from verification service
-#Input to postprocessing service
-class AIQueryResponse(Query):
-    result: AIResponse
 
 router = APIRouter(prefix="/postprocessing", tags=["PostProcessing"])
 

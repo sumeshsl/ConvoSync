@@ -1,11 +1,10 @@
 from fastapi import APIRouter,Request, HTTPException
 from pymongo.errors import DuplicateKeyError, PyMongoError
-from app.database.mongodb import queries_collection, get_next_id
-from app.schemas import Query, AIQueryResponse, AIResponse
+from mongodb import queries_collection,get_next_id
+from rediscache import get_redis_cache, set_redis_cache
+from schemas import Query,AIQueryResponse,AIResponse
 from typing import List
-import traceback
-import logging
-import httpx
+import traceback, logging, httpx, json
 
 logging.basicConfig(
     level=logging.INFO,
@@ -15,21 +14,30 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/queries", tags=["Queries"])
 
-# in-memory query data
-queries = []
 
 # Define backend microservices URLs
 POSTPROCESSING_API_URL = "http://api-postprocessing:8004/postprocessing/"
 
 # GET all items
 @router.get("/", response_model=List[Query])
-async def get_queries():
+async def get_queries(re):
+    """Retrieve all queries, using Redis cache if available."""
+
+    # ✅ Check if data exists in Redis cache
+    cache_key = "queries_cache"
+    cached_data = await get_redis_cache(cache_key)
+    if cached_data:
+        logger.info("Returning cached data")
+        return json.loads(cached_data)  # ✅ Return cached data
+
+    # If not cached, fetch from MongoDB
     queriesdb = await queries_collection.find().to_list(100)
-    for query in queriesdb:
-        queries.append(query)
-        if "id" not in query:  # If `id` is missing, use `_id`
-            query["id"] = str(query["_id"])  # Convert ObjectId to string
+
+    await set_redis_cache(cache_key,queriesdb)
+    logger.info(f"After setting redis cache")
+
     return queriesdb
+
 
 # GET a single item by ID
 @router.get("/{query_id}", response_model=Query)
@@ -52,8 +60,6 @@ async def create_query(query: Query,request: Request):
 
         if not result.inserted_id:
             raise HTTPException(status_code=500, detail="Insert failed: No ID returned")
-
-        queries.append(query_dict)
 
         ai_response = AIResponse(
             response= "Yes",
