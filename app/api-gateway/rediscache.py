@@ -12,9 +12,9 @@ async def get_redis_cache(cache_key):
     return redis_client.get(cache_key)
 
 
-async def set_redis_cache(cache_key, data):
+async def set_redis_cache(user_id,session_id,data,ttl=600):
     json_data = json.dumps(serialize_mongo_data(data))
-    return redis_client.setex(cache_key, 600, json_data)
+    return redis_client.setex(f"querycache:{user_id}:{session_id}", ttl, json_data)
 
 # 🔹 Helper Function: Convert ObjectId to string
 def serialize_mongo_data(data):

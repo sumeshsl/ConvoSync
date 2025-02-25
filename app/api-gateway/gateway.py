@@ -10,7 +10,7 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-from rediscache import cache_exists
+from rediscache import cache_exists,store_session
 
 
 limiter = Limiter(key_func=get_remote_address)
@@ -20,10 +20,10 @@ app = FastAPI(title="AdaptAI API Gateway")
 app.state.limiter = limiter
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],#TODO: Edit it to match the web client
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 
 logging.basicConfig(
@@ -51,14 +51,21 @@ MICROSERVICES = {
 # Generate JWT token
 def create_jwt_token(username: str):
     """Create a JWT token."""
-    session_id = str(uuid.uuid4())  # ✅ Generate a unique session ID
-    expiration = datetime.utcnow() + timedelta(hours=1)  # Token expiration time
+    ttl = timedelta(minutes=60)
+    session_id = str(uuid.uuid4())  # Generate a unique session ID
+    expiration = datetime.utcnow() + ttl  # Token expiration time
     payload = {
         "user_id": username,
         "session_id": session_id,
         "exp": expiration
     }
-    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    store_session(username,session_id,token,ttl)
+    response = {
+        'token': token,
+        'expires_in': ttl
+    }
+    return response
 
 # User login
 @app.post("/login")
@@ -71,7 +78,7 @@ def login(user: UserLogin):
     raise HTTPException(status_code=401, detail="Invalid credentials")
 
 
-async def forward_request(service_name: str, request: Request):
+async def forward_request(service_name: str, request: Request, headers: dict):
     """Forward request from API Gateway to the target microservice."""
     if service_name not in MICROSERVICES:
         logger.error(f"Service {service_name} not found.")
@@ -86,7 +93,7 @@ async def forward_request(service_name: str, request: Request):
 
         try:
             response = await client.request(
-                method, service_url, content=body, headers=request.headers, params=request.query_params
+                method, service_url, content=body, headers=headers, params=request.query_params
             )
 
             # ✅ Log Response Status First
@@ -113,8 +120,10 @@ async def gateway(service_name: str, request: Request, credentials: HTTPAuthoriz
     """Authenticated Gateway Request."""
     token = credentials.credentials
     user_id, session_id = verify_jwt(token)
-    request.headers = {"user-id": user_id, "session-id": session_id}
-    return await forward_request(service_name, request)
+    modified_headers = dict(request.headers)
+    modified_headers["user-id"] = user_id
+    modified_headers["session-id"] = session_id
+    return await forward_request(service_name, request, modified_headers)
 
 @app.get("/")
 def root():

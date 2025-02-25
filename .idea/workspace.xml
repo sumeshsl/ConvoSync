@@ -4,33 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eae406a1-c8c2-4021-a5d5-5d209ffa53da" name="Changes" comment="Initial Commit">
-      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-gateway/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-gateway/gateway.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-gateway/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/postprocessing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/postprocessing_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-verification/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-verification/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-verification/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-verification/verification.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api-verification/verification_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/database/mongodb.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ConvoSync.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/adaptAI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="eae406a1-c8c2-4021-a5d5-5d209ffa53da" name="Changes" comment="Redis cache added">
+      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/redisstream_listener.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/queryRoutes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/query_routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-gateway/gateway.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-gateway/gateway.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-gateway/rediscache.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-gateway/rediscache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-postprocessing/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/postprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-postprocessing/postprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/postprocessing_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-postprocessing/postprocessing_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/rediscache.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-postprocessing/rediscache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-preprocessing/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-preprocessing/preprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-preprocessing/preprocessing_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-preprocessing/preprocessing_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-preprocessing/rediscache.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-preprocessing/rediscache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-verification/rediscache.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-verification/rediscache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/database/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,34 +73,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.gateway.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Sumesh/Documents/Sumesh/F1Dream/Villanova/Learnings/2025_Spring/9025/ConvoSync/app/web-socket",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.gateway.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Sumesh/F1Dream/Villanova/Learnings/2025_Spring/9025/ConvoSync&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-gateway" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-verification" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-preprocessing" />
       <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\web-socket" />
-      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-verification" />
-      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
-      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-gateway" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-preprocessing" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\database" />
       <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
-      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\routes" />
-      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-gateway" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -139,7 +131,15 @@
       <workItem from="1739069065314" duration="6518000" />
       <workItem from="1739075682554" duration="1992000" />
       <workItem from="1739227161706" duration="5491000" />
-      <workItem from="1739290068658" duration="5405000" />
+      <workItem from="1739290068658" duration="10083000" />
+      <workItem from="1739594922289" duration="9544000" />
+      <workItem from="1739712086134" duration="5007000" />
+      <workItem from="1739761183023" duration="728000" />
+      <workItem from="1739851778662" duration="9885000" />
+      <workItem from="1739893335204" duration="13834000" />
+      <workItem from="1740120182074" duration="5921000" />
+      <workItem from="1740203076134" duration="293000" />
+      <workItem from="1740291200598" duration="12044000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -149,7 +149,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738087114174</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Second set of changes">
+      <option name="closed" value="true" />
+      <created>1739301696976</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739301696976</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Redis cache added">
+      <option name="closed" value="true" />
+      <created>1739896623746</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739896623746</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,15 +173,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+    <MESSAGE value="Second set of changes" />
+    <MESSAGE value="Redis cache added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Redis cache added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/routes/query_routes.py</url>
-          <line>26</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/app/api-postprocessing/rediscache.py</url>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

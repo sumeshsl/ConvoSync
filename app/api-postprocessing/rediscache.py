@@ -5,13 +5,13 @@ import redis
 # ✅ Connect to Redis
 redis_client = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
 
+
 async def get_redis_cache(cache_key):
     return redis_client.get(cache_key)
 
-
-async def set_redis_cache(cache_key, data):
+async def set_redis_cache(cache_key,data,ttl=600):
     json_data = json.dumps(serialize_mongo_data(data))
-    return redis_client.setex(cache_key, 600, json_data)
+    return redis_client.setex(cache_key, ttl, json_data)
 
 # 🔹 Helper Function: Convert ObjectId to string
 def serialize_mongo_data(data):
@@ -28,3 +28,5 @@ def serialize_mongo_data(data):
 def store_session(user_id, session_id, jwt_token, ttl=3600):
     """Store session in Redis with expiration (1 hour)."""
     redis_client.setex(f"session:{user_id}:{session_id}", ttl, jwt_token)
+
+

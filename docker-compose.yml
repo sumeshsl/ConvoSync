@@ -16,9 +16,6 @@ services:
     restart: always
     networks:
       - adaptai-network
-    #environment:
-      #MONGO_INITDB_ROOT_USERNAME: root
-      #MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - "27017:27017"
     volumes:
@@ -56,12 +53,15 @@ services:
     build:
       context: ./app/api-postprocessing
     container_name: api-postprocessing
+    depends_on:
+      - redis
     networks:
       - adaptai-network
     ports:
       - "8004:8004"
     environment:
       - PYTHONPATH=/app
+      - REDIS_HOST=redis
     command: ["uvicorn", "postprocessing:app", "--host", "0.0.0.0", "--port", "8004"]
 
   api-verification:

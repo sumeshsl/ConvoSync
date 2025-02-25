@@ -11,4 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8004
 
-CMD ["uvicorn", "postprocessing:app", "--host", "0.0.0.0", "--port", "8004"]
+
+# Start FastAPI App (also starts Redis listener)
+CMD ["python", "postprocessing.py"]
+
+#CMD ["uvicorn", "postprocessing:app", "--host", "0.0.0.0", "--port", "8004"]

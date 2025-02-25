@@ -5,6 +5,7 @@ import logging
 from typing import Optional
 import asyncio
 import websockets
+from schemas import AIQueryResponse,AIResponse
 
 
 logging.basicConfig(
