@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eae406a1-c8c2-4021-a5d5-5d209ffa53da" name="Changes" comment="Redis cache added">
-      <change afterPath="$PROJECT_DIR$/app/api-postprocessing/redisstream_listener.py" afterDir="false" />
+    <list default="true" id="eae406a1-c8c2-4021-a5d5-5d209ffa53da" name="Changes" comment="Structure changes">
+      <change afterPath="$PROJECT_DIR$/app/redis-stream-listeners/redisstream_listener.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api-gateway/gateway.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-gateway/gateway.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api-gateway/rediscache.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-gateway/rediscache.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-postprocessing/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/postprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-postprocessing/postprocessing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/postprocessing_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-postprocessing/postprocessing_routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/rediscache.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-postprocessing/rediscache.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api-preprocessing/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-preprocessing/preprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/redis-stream-listeners/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-postprocessing/redisstream_listener.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api-preprocessing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/redis-stream-listeners/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api-preprocessing/preprocessing_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-preprocessing/preprocessing_routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api-preprocessing/rediscache.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-preprocessing/rediscache.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api-verification/rediscache.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api-verification/rediscache.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/database/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,37 +67,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.gateway.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Sumesh/F1Dream/Villanova/Learnings/2025_Spring/9025/ConvoSync&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.gateway.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/Sumesh/F1Dream/Villanova/Learnings/2025_Spring/9025/ConvoSync/app/redis-stream-listeners",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-gateway" />
-      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
-      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-verification" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\redis-stream-listeners" />
       <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-preprocessing" />
-      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\web-socket" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\schemas" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-gateway" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
       <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-preprocessing" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app" />
       <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync" />
+      <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
       <recent name="D:\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\database" />
-      <recent name="C:\Users\Sumesh\Documents\Sumesh\F1Dream\Villanova\Learnings\2025_Spring\9025\ConvoSync\app\api-postprocessing" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -139,7 +133,10 @@
       <workItem from="1739893335204" duration="13834000" />
       <workItem from="1740120182074" duration="5921000" />
       <workItem from="1740203076134" duration="293000" />
-      <workItem from="1740291200598" duration="12044000" />
+      <workItem from="1740291200598" duration="21652000" />
+      <workItem from="1740462783148" duration="159000" />
+      <workItem from="1740463227675" duration="4593000" />
+      <workItem from="1740504859336" duration="6074000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -165,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739896623746</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Structure changes">
+      <option name="closed" value="true" />
+      <created>1740452885869</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1740452885869</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,7 +180,8 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Second set of changes" />
     <MESSAGE value="Redis cache added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Redis cache added" />
+    <MESSAGE value="Structure changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Structure changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   redis:
     image: redis:latest
@@ -23,7 +21,8 @@ services:
 
 
   api-preprocessing:
-    build: ./app/api-preprocessing
+    build:
+      context: ./app/api-preprocessing
     container_name: api-preprocessing
     networks:
       - adaptai-network
@@ -31,7 +30,7 @@ services:
       - mongodb
       - api-postprocessing
     environment:
-      MONGO_URI: "mongodb://adaptaiuser:securePassword@mongodb:27017/adaptAiDatabase?authSource=adaptAiDatabase"
+      MONGO_URI: "mongodb://adaptaiuser:securePassword@mongodb:27017/adaptAiDatabase?authSource=admin"
       PYTHONPATH: /app
     ports:
       - "8008:8008"
@@ -75,6 +74,22 @@ services:
     environment:
       - PYTHONPATH=/app
     command: ["uvicorn", "verification:app", "--host", "0.0.0.0", "--port", "8002"]
+
+  redis-stream-listener:
+    build:
+      context: ./app/redis-stream-listeners
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_STREAM_NAME=preprocess_request
+      - CONSUMER_GROUP=post-processing-grp
+      - CONSUMER_NAME=preprocess_request
+      - BLOCK_MS=5000
+    depends_on:
+      - redis
+    networks:
+      - adaptai-network
+    restart: unless-stopped
 
 volumes:
   mongo_data:

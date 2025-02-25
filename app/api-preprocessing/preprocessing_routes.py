@@ -15,10 +15,6 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/queries", tags=["Queries"])
 
-
-# Define backend microservices URLs
-POSTPROCESSING_API_URL = "http://api-postprocessing:8004/postprocessing/"
-
 # GET all items
 @router.get("/", response_model=List[Query])
 async def get_queries(request: Request):
@@ -98,8 +94,7 @@ async def create_query(query: Query,request: Request, background_tasks: Backgrou
         )
 
         background_tasks.add_task(send_event(ai_query_response))
-        #Commented forward request
-        #background_tasks.add_task(forward_request(ai_query_response))
+
         # ✅ Return response from both MongoDB insert & API call
         return Query(
             id=query_dict["id"],
@@ -128,33 +123,6 @@ async def create_query(query: Query,request: Request, background_tasks: Backgrou
     return {**query_dict, "inserted_id": str(result.inserted_id)}
 
 
-# async def forward_request(ai_query_response):
-#     async with httpx.AsyncClient() as client:
-#         try:
-#             response = await client.post(POSTPROCESSING_API_URL, json=ai_query_response.dict())
-#
-#             if response.status_code != 200:
-#                 raise HTTPException(status_code=500,
-#                                     detail=f"Failed to send AIQueryResponse to external API: {response.text}")
-#
-#         except httpx.HTTPStatusError as http_err:
-#             logger.error(f"HTTP Error: {http_err.response.status_code} - {http_err.response.text}")
-#             raise HTTPException(status_code=http_err.response.status_code,
-#                                 detail=f"External API Error: {http_err.response.text}")
-#
-#         except httpx.RequestError as req_err:
-#             logger.error(f"Request Error: {str(req_err)}")
-#             raise HTTPException(status_code=500,
-#                                 detail=f"Failed to send request to postprocessing API: {str(req_err)}")
-#
-#         except ValueError:
-#             raise HTTPException(status_code=500,
-#                                 detail=f"Invalid JSON received from postprocessing API: {response.text}")
-#
-#         except Exception as e:
-#             error_type = type(e).__name__  # Get the exception type
-#             error_details = traceback.format_exc()  # Get full traceback
-#             logger.error(f"Exception Type: {error_type}\nDetails: {error_details}")
-#             raise HTTPException(status_code=500, detail=f"Unexpected error ({error_type}): {str(e)}")
+
 
 
