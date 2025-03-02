@@ -70,13 +70,11 @@ def redis_polling():
     redis_client = connect_to_redis()
     setup_consumer_group(redis_client, REDIS_STREAM_NAME, CONSUMER_GROUP)
 
-    #logger.info(f"Starting to listen for messages on stream '{REDIS_STREAM_NAME}'")
-
     # Track last processed ID for recovery
     last_id = '0'  # Start from the beginning
     while True:
         try:
-            logger.info(f"Starting to listen for messages on stream '{REDIS_STREAM_NAME}'")
+            logger.debug(f"Starting to listen for messages on stream '{REDIS_STREAM_NAME}'")
             messages = redis_client.xreadgroup(
                 groupname=CONSUMER_GROUP,
                 consumername=CONSUMER_NAME,
@@ -96,7 +94,7 @@ def redis_polling():
                         # Acknowledge the message after processing
                         redis_client.xack(REDIS_STREAM_NAME, CONSUMER_GROUP, entry_id)
             else:
-                print("No new messages. Polling again...")
+                logger.debug("No new messages. Polling again...")
 
             time.sleep(1)
         except Exception as e:
