@@ -1,4 +1,5 @@
 from fastapi import FastAPI, WebSocket
+from starlette.websockets import WebSocketDisconnect
 from typing import List
 import verification_routes
 
@@ -30,6 +31,15 @@ async def websocket_endpoint(websocket: WebSocket):
             print(f"Received message: {data}")
             for client in connected_clients:
                 await client.send_text(f"Echo: {data}")
-    except:
-        connected_clients.remove(websocket)
-        await websocket.close()
+    except Exception as e:
+        if isinstance(e, WebSocketDisconnect):
+            # Client already disconnected, just remove from list
+            connected_clients.remove(websocket)
+        else:
+            # For other exceptions, attempt to close if not already closed
+            connected_clients.remove(websocket)
+            try:
+                await websocket.close()
+            except RuntimeError:
+                # Ignore "already closed" errors
+                pass

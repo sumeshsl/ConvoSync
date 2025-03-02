@@ -1,8 +1,6 @@
 from fastapi import APIRouter,Request
 from typing import List
-from pydantic import BaseModel
 import logging
-from typing import Optional
 from schemas import QueryResult,AIQueryResponse
 
 logging.basicConfig(

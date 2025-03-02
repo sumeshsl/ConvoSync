@@ -93,7 +93,7 @@ async def create_query(query: Query,request: Request, background_tasks: Backgrou
             result=ai_response
         )
 
-        background_tasks.add_task(send_event(ai_query_response))
+        background_tasks.add_task(send_event,ai_query_response)
 
         # ✅ Return response from both MongoDB insert & API call
         return Query(
