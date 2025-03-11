@@ -1,12 +1,9 @@
 from fastapi import APIRouter,Request
 from typing import List
-from pydantic import BaseModel
 import logging
-from typing import Optional
 import asyncio
 import websockets
-from schemas import AIQueryResponse,AIResponse
-
+from schemas import AIQueryResponse
 
 logging.basicConfig(
     level=logging.INFO,
@@ -14,31 +11,25 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
-
 router = APIRouter(prefix="/postprocessing", tags=["PostProcessing"])
 
 # in-memory AI response data
-responses = [
-    {"id": 1, "usercommand": "Command 01", "source": "Web", "result": { "response" :"Yes", "model": "openai"}},
-    {"id": 2, "usercommand": "Command 02", "source": "iPhone", "result": { "response" :"No", "model": "perplexityai"}},
-    {"id": 3, "usercommand": "Command 03", "source": "Web", "result": { "response" :"Yes", "model": "deepseek"}}
-]
+responses = []
 
 
 
-# GET all responses
-@router.get("/", response_model=List[AIQueryResponse])
-def get_responses():
-    return responses
-
-# GET a single response by ID
-@router.get("/{response_id}", response_model=AIQueryResponse)
-def get_response(response_id: int):
-    for response in responses:
-        if response["id"] == response_id:
-            return response
-    return {"error": "Query not found"}
+# # GET all responses
+# @router.get("/", response_model=List[AIQueryResponse])
+# def get_responses():
+#     return responses
+#
+# # GET a single response by ID
+# @router.get("/{response_id}", response_model=AIQueryResponse)
+# def get_response(response_id: int):
+#     for response in responses:
+#         if response["id"] == response_id:
+#             return response
+#     return {"error": "Query not found"}
 
 
 # POST request post-processing on the AI response

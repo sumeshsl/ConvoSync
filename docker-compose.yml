@@ -18,7 +18,12 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
-
+    command: mongod --quiet --logpath /dev/null
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   api-preprocessing:
     build:
@@ -42,6 +47,8 @@ services:
     container_name: api-gateway
     networks:
       - adaptai-network
+    env_file:
+      - development.env
     ports:
       - "8010:8010"
     depends_on:
