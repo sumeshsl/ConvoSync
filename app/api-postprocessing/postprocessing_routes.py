@@ -16,25 +16,15 @@ router = APIRouter(prefix="/postprocessing", tags=["PostProcessing"])
 # in-memory AI response data
 responses = []
 
-
-
-# # GET all responses
-# @router.get("/", response_model=List[AIQueryResponse])
-# def get_responses():
-#     return responses
-#
-# # GET a single response by ID
-# @router.get("/{response_id}", response_model=AIQueryResponse)
-# def get_response(response_id: int):
-#     for response in responses:
-#         if response["id"] == response_id:
-#             return response
-#     return {"error": "Query not found"}
-
-
-# POST request post-processing on the AI response
 @router.post("/", response_model=AIQueryResponse)
 async def request_post_processing(response: AIQueryResponse):
+    """
+    POST request post-processing on the AI response to get it validated.\n
+    Arguments:  \n
+        response: AI query response that needs to be post-processed. \n
+    Returns:  \n
+        Processed query with validated results.\n
+    """
     logger.info("Entered post processing POST request")
     response_dict = response.dict()
     responses.append(response_dict)
@@ -42,11 +32,17 @@ async def request_post_processing(response: AIQueryResponse):
     return AIQueryResponse(**response_dict)
 
 async def websocket_client():
+    """
+    Processes query response from websocket server in verification server \n
+    Returns:  \n
+        Realtime validated query.\n
+    """
     uri = "ws://api-verification:8002/ws"  # Use the service name in Docker
     async with websockets.connect(uri) as websocket:
         await websocket.send("Hello from Post processing server!")
         response = await websocket.recv()
         print(f"Response from Verification {response}")
+        return response
 
 if __name__ == "__main__":
     asyncio.run(websocket_client())

@@ -15,10 +15,15 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/queries", tags=["Queries"])
 
-# GET all items
 @router.get("/", response_model=List[Query])
 async def get_queries(request: Request):
-    """Retrieve user-specific data from Redis cache."""
+    """
+    GET fetches all queries for a specific user session.\n
+    Arguments:  \n
+        request: Client request for preprocessing. \n
+    Returns:  \n
+        All the queries for this user.\n
+    """
     user_id = request.headers.get("user-id")
     session_id = request.headers.get("session-id")
 
@@ -45,6 +50,13 @@ async def get_queries(request: Request):
 # GET a single item by ID
 @router.get("/{query_id}", response_model=Query)
 async def get_query(query_id: int):
+    """
+    GET fetches a queries for a specific user session.\n
+    Arguments:  \n
+        response: AI query response that needs to be post-processed. \n
+    Returns:  \n
+        The query data requested.\n
+    """
     query = await queries_collection.find_one({"id": query_id})
     if query:
         return query
@@ -53,6 +65,13 @@ async def get_query(query_id: int):
 # POST a new query
 @router.post("/", response_model=Query)
 async def create_query(query: Query,request: Request, background_tasks: BackgroundTasks):
+    """
+        POST Creates a query request to the server for processing.\n
+        Arguments:  \n
+            query: The query requested. \n
+        Returns:  \n
+            Processed result of the query.\n
+        """
     await get_queries(request)
     query_dict = query.dict()
     try:
@@ -121,8 +140,3 @@ async def create_query(query: Query,request: Request, background_tasks: Backgrou
         )
 
     return {**query_dict, "inserted_id": str(result.inserted_id)}
-
-
-
-
-

@@ -43,7 +43,7 @@ services:
 
   api-gateway:
     build:
-      context: ./app/api-gateway
+      context: app/api-gateway
     container_name: api-gateway
     networks:
       - adaptai-network

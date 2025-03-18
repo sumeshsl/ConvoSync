@@ -18,8 +18,3 @@ app.add_middleware(
 
 # Include the example routes
 app.include_router(preprocessing_routes.router)
-
-# Root endpoint
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to AdaptAI API!"}
