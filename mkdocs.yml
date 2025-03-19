@@ -1,0 +1,107 @@
+site_name: AdaptAI API documentation
+site_url: https://sumeshsl.github.io/adaptai-documentation/
+nav:
+  - Gateway : doc-gateway.md
+  - Preprocessing : doc-preprocessing.md
+  - Postprocessing : doc-postprocessing.md
+  - Verification : doc-verification.md
+  - Seq diagrams : seq-diagrams.md
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  font:
+    text: Merriweather Sans
+
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  palette:
+    #Dark Mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark mode
+      primary: light blue
+      accent: lime
+    # Light Mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Light mode
+      primary: light blue
+      accent: purple
+#
+#plugins:
+#  - social
+#  - search
+#
+
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            heading_level: 2
+            parameter_headings: false
+            show_root_heading: false
+            show_source: false
+            show_root_full_path: true
+            inherited_members: false
+            members_order: alphabetical
+            show_labels: false
+            summary:
+              attributes: true
+              functions: true
+              modules: false
+            docstring_section_style: list
+            annotations_path: brief
+            separate_signature: true
+            line_length: 60
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/sumeshsl
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/sumeshsl/
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+copyright: |
+  &copy; 2025 <a href="https://github.com/sumeshsl"  target="_blank" rel="noopener">Sumesh S L</a>
