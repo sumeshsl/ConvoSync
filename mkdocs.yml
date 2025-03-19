@@ -1,5 +1,4 @@
 site_name: AdaptAI API documentation
-site_url: https://sumeshsl.github.io/adaptai-documentation/
 nav:
   - Gateway : doc-gateway.md
   - Preprocessing : doc-preprocessing.md
