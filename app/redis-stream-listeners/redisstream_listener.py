@@ -16,7 +16,7 @@ BLOCK_MS = int(os.environ.get('BLOCK_MS', 5000))  # Time to block waiting for ne
 
 
 # Define backend microservices URLs
-POSTPROCESSING_API_URL = "http://api-postprocessing:8004/postprocessing/"
+POSTPROCESSING_API_URL = os.environ.get("POSTPROCESSING_URL")
 
 logging.basicConfig(
     level=logging.INFO,
@@ -103,9 +103,9 @@ def redis_polling():
 
 def forward_request(ai_query_response):
     logger.info("Forwarding request")
-    with httpx.Client() as client:  # ✅ Use synchronous `httpx.Client()` instead of `asyncClient`
+    with httpx.Client() as client:  # Use synchronous `httpx.Client()` instead of `asyncClient`
         try:
-            # ✅ Ensure `result` is correctly parsed as a dictionary
+            # Ensure `result` is correctly parsed as a dictionary
             if isinstance(ai_query_response["result"], str):
                 try:
                     ai_query_response["result"] = json.loads(ai_query_response["result"].replace("'", '"'))
@@ -113,7 +113,7 @@ def forward_request(ai_query_response):
                     logger.error(f"JSON Decode Error: {str(e)} - Raw Data: {ai_query_response['result']}")
                     ai_query_response["result"] = {"error": "Invalid result format"}
 
-            # ✅ Convert `id` to an integer if it's a valid number
+            # Convert `id` to an integer if it's a valid number
             if "id" in ai_query_response and isinstance(ai_query_response["id"], str) and ai_query_response[
                 "id"].isdigit():
                 ai_query_response["id"] = int(ai_query_response["id"])

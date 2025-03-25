@@ -104,7 +104,7 @@ def verify_jwt(token: str) -> Tuple[str, str]:
         user_id = payload["user_id"]
         session_id = payload["session_id"]
 
-        # ✅ Check if session exists in Redis
+        # Check if session exists in Redis
         session_key = f"session:{user_id}:{session_id}"
 
         if not cache_exists(session_key):

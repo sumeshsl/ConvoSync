@@ -2,7 +2,7 @@ import json
 from bson import ObjectId
 import redis
 
-# ✅ Connect to Redis
+# Connect to Redis
 redis_client = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
 
 async def get_redis_cache(cache_key):
@@ -21,7 +21,7 @@ def serialize_mongo_data(data):
     elif isinstance(data, dict):
         return {key: serialize_mongo_data(value) for key, value in data.items()}
     elif isinstance(data, ObjectId):
-        return str(data)  # ✅ Convert ObjectId to string
+        return str(data)  # Convert ObjectId to string
     else:
         return data
 

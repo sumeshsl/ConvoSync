@@ -4,6 +4,8 @@ from typing import Optional
 #Input for preprocessing model
 class Query(BaseModel):
     id: Optional[int] = None
+    user_id: Optional[str] = None
+    session_id: Optional[str] = None
     usercommand: str
     source: str
 

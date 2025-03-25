@@ -31,20 +31,23 @@ async def get_queries(request: Request):
     if not user_id or not session_id:
         raise HTTPException(status_code=401, detail="Unauthorized: Missing session data")
 
-    # ✅ Check if data exists in Redis cache
+    #  Check if data exists in Redis cache
     cache_key = f"querycache:{user_id}:{session_id}"
     cached_data = await get_redis_cache(cache_key)
     if cached_data:
         logger.info("Returning cached data")
-        return json.loads(cached_data)  # ✅ Return cached data
+        return json.loads(cached_data)  # Return cached data
 
     # If not cached, fetch from MongoDB
-    queriesdb = await queries_collection.find().to_list(100)
+    queries_db = await queries_collection.find({
+        "user_id": user_id,
+        "session_id": session_id
+    }).to_list(100)
 
-    await set_redis_cache(cache_key,queriesdb)
+    await set_redis_cache(cache_key,queries_db)
     logger.info(f"After setting redis cache")
 
-    return queriesdb
+    return queries_db
 
 
 # GET a single item by ID
@@ -76,17 +79,22 @@ async def create_query(query: Query,request: Request, background_tasks: Backgrou
     query_dict = query.dict()
     try:
 
+        """Retrieve user-specific data from Request."""
+        user_id = request.headers.get("user-id")
+        session_id = request.headers.get("session-id")
+
+
         query_dict["id"] = await get_next_id()
+        query_dict["user_id"] = user_id
+        query_dict["session_id"] = session_id
         logger.info(f"New query: {query_dict}")
         result = await queries_collection.insert_one(query_dict)
 
         if not result.inserted_id:
             raise HTTPException(status_code=500, detail="Insert failed: No ID returned")
 
-        """Retrieve user-specific data from Redis cache."""
-        user_id = request.headers.get("user-id")
-        session_id = request.headers.get("session-id")
 
+        #test2va_service(query, user_id, session_id)
         cache_key = f"querycache:{user_id}:{session_id}"
 
         # Invalidate (Delete) Redis Cache for `get_queries()`
@@ -94,7 +102,7 @@ async def create_query(query: Query,request: Request, background_tasks: Backgrou
         logger.info("Redis cache invalidated after inserting new query.")
 
         # Fetch updated queries from MongoDB
-        queriesdb = await queries_collection.find().to_list(100)
+        queriesdb = await queries_collection.find({"user_id": user_id}).to_list(100)
 
         # Store the updated queries in Redis
         await set_redis_cache(cache_key, queriesdb)
@@ -107,6 +115,8 @@ async def create_query(query: Query,request: Request, background_tasks: Backgrou
 
         ai_query_response = AIQueryResponse(
             id=query_dict.get("id"),
+            user_id=query_dict.get("user_id"),
+            session_id=query_dict.get("session_id"),
             usercommand=query_dict["usercommand"],
             source=query_dict["source"],
             result=ai_response
@@ -114,9 +124,11 @@ async def create_query(query: Query,request: Request, background_tasks: Backgrou
 
         background_tasks.add_task(send_event,ai_query_response)
 
-        # ✅ Return response from both MongoDB insert & API call
+        # Return response from both MongoDB insert & API call
         return Query(
             id=query_dict["id"],
+            user_id=query_dict["user_id"],
+            session_id=query_dict["session_id"],
             usercommand=query_dict["usercommand"],
             source=query_dict["source"]
         )
