@@ -34,9 +34,8 @@ services:
     depends_on:
       - mongodb
       - api-postprocessing
-    environment:
-      MONGO_URI: "mongodb://adaptaiuser:securePassword@mongodb:27017/adaptAiDatabase?authSource=admin"
-      PYTHONPATH: /app
+    env_file:
+      - development.env
     ports:
       - "8008:8008"
     command: ["uvicorn", "preprocessing:app", "--host", "0.0.0.0", "--port", "8008"]
@@ -65,9 +64,8 @@ services:
       - adaptai-network
     ports:
       - "8004:8004"
-    environment:
-      - PYTHONPATH=/app
-      - REDIS_HOST=redis
+    env_file:
+      - development.env
     command: ["uvicorn", "postprocessing:app", "--host", "0.0.0.0", "--port", "8004"]
 
   api-verification:
@@ -78,20 +76,15 @@ services:
       - adaptai-network
     ports:
       - "8002:8002"
-    environment:
-      - PYTHONPATH=/app
+    env_file:
+      - development.env
     command: ["uvicorn", "verification:app", "--host", "0.0.0.0", "--port", "8002"]
 
   redis-stream-listener:
     build:
       context: ./app/redis-stream-listeners
-    environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - REDIS_STREAM_NAME=preprocess_request
-      - CONSUMER_GROUP=post-processing-grp
-      - CONSUMER_NAME=preprocess_request
-      - BLOCK_MS=5000
+    env_file:
+      - development.env
     depends_on:
       - redis
     networks:

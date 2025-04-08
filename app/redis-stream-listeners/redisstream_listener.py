@@ -1,7 +1,8 @@
 import redis
-import logging, json, os
+import logging,json, os
 import time,httpx,traceback, threading
 from fastapi import HTTPException
+from datetime import datetime
 
 
 # Redis connection details from environment variables with defaults
@@ -101,6 +102,7 @@ def redis_polling():
             print(f"Error in Redis polling: {e}")
             time.sleep(5)  # Wait before retrying
 
+
 def forward_request(ai_query_response):
     logger.info("Forwarding request")
     with httpx.Client() as client:  # Use synchronous `httpx.Client()` instead of `asyncClient`
@@ -113,10 +115,38 @@ def forward_request(ai_query_response):
                     logger.error(f"JSON Decode Error: {str(e)} - Raw Data: {ai_query_response['result']}")
                     ai_query_response["result"] = {"error": "Invalid result format"}
 
+            # Handle metadata as a string that contains Python dict notation
+            if isinstance(ai_query_response["metadata"], str):
+                # Create a new clean metadata dictionary
+                metadata_dict = {}
+
+                # Extract key pieces of info using string manipulation instead of trying to parse as JSON
+                metadata_str = ai_query_response["metadata"]
+
+                # Extract app_id
+                if "'app_id': '" in metadata_str:
+                    app_id_start = metadata_str.index("'app_id': '") + len("'app_id': '")
+                    app_id_end = metadata_str.index("'", app_id_start)
+                    metadata_dict["app_id"] = metadata_str[app_id_start:app_id_end]
+
+                # Extract needs_verification
+                if "'needs_verification': " in metadata_str:
+                    needs_verification_str = "True"
+                    if "'needs_verification': False" in metadata_str:
+                        needs_verification_str = "False"
+                    metadata_dict["needs_verification"] = needs_verification_str == "True"
+
+                # Add a properly formatted timestamp
+                metadata_dict["timestamp"] = datetime.now().isoformat()
+
+                # Replace the string metadata with our dictionary
+                ai_query_response["metadata"] = metadata_dict
+
             # Convert `id` to an integer if it's a valid number
             if "id" in ai_query_response and isinstance(ai_query_response["id"], str) and ai_query_response[
                 "id"].isdigit():
                 ai_query_response["id"] = int(ai_query_response["id"])
+
             logger.info(f"Formatted Data Before Sending: {ai_query_response}")
 
             response = client.post(POSTPROCESSING_API_URL, json=ai_query_response)

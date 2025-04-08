@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 # Define backend microservices URLs
 MICROSERVICES = {
-    "queries": os.getenv("PREPROCESSING_URL")
+    "queries": os.environ.get("PREPROCESSING_URL")
 }
 
 # Security Token Bearer
